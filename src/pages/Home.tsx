@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { ArrowRight, CalendarDays, Clock3, Newspaper } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import type { Article } from '../types'
-import { ErrorState, LoadingState } from '../components/Status'
+import { ErrorState, NewsGridSkeleton } from '../components/Status'
 
 export function Home({ openArticle, openEditor }: { openArticle: (date: string) => void; openEditor: () => void }) {
   const [articles, setArticles] = useState<Article[]>([])
@@ -27,7 +27,7 @@ export function Home({ openArticle, openEditor }: { openArticle: (date: string) 
   return (
     <main>
       <section className="archive-section" aria-label="Published daily briefings">
-        {loading ? <LoadingState /> : error ? <ErrorState message={error} retry={() => void loadArticles()} /> : articles.length === 0 ? (
+        {loading ? <NewsGridSkeleton /> : error ? <ErrorState message={error} retry={() => void loadArticles()} /> : articles.length === 0 ? (
           <div className="empty-archive"><Newspaper size={30} /><h2>No published briefings yet</h2><p>Open the editor to publish the first daily market report.</p></div>
         ) : (
           <div className="article-card-list">
@@ -45,7 +45,11 @@ export function Home({ openArticle, openEditor }: { openArticle: (date: string) 
         )}
       </section>
 
-      <footer className="site-footer"><span>Market Daily News</span><button type="button" onClick={openEditor}>Editor access</button></footer>
+      <footer className="site-footer">
+        <span>Market Daily News</span>
+        <span className="footer-social">ig: <em>@yourusername</em></span>
+        <button type="button" onClick={openEditor}>Editor access</button>
+      </footer>
     </main>
   )
 }
