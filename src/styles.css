@@ -59,12 +59,16 @@ h1, h2, h3, p { margin-top: 0; }
 .app-shell { min-height: 100vh; }
 
 .site-header { position: sticky; top: 0; z-index: 40; display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 20px; padding: 16px clamp(18px, 4vw, 64px); border-bottom: 1px solid color-mix(in srgb, var(--border) 82%, transparent); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(18px); }
+.header-brand-group { display: flex; min-width: 0; align-items: center; gap: 14px; }
 .brand { display: flex; align-items: center; gap: 12px; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; }
 .brand-mark { display: grid; width: 44px; height: 44px; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in srgb, var(--logo-fg) 18%, transparent); border-radius: 13px; background: var(--logo-bg); color: var(--logo-fg); box-shadow: 0 8px 22px color-mix(in srgb, var(--logo-bg) 28%, transparent); transition: transform 180ms ease, box-shadow 180ms ease; }
 .brand:hover .brand-mark { transform: rotate(-3deg) scale(1.04); box-shadow: 0 11px 28px color-mix(in srgb, var(--logo-bg) 38%, transparent); }
 .brand:active .brand-mark { transform: scale(0.94); }
 .brand strong { display: block; }
 .brand strong { font-family: 'Libre Franklin', sans-serif; font-size: 0.98rem; letter-spacing: -0.02em; }
+.header-app-switch { display: inline-flex; min-height: 38px; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--muted); font-size: 0.76rem; font-weight: 750; text-decoration: none; transition: border-color 160ms ease, color 160ms ease, transform 160ms ease; }
+.header-app-switch:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+.header-app-switch:active { transform: scale(0.96); }
 .header-actions { display: flex; align-items: center; gap: 9px; }
 .theme-button, .editor-badge { display: inline-flex; min-height: 40px; align-items: center; gap: 7px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 11px; background: var(--surface); font-size: 0.78rem; font-weight: 700; }
 .theme-button { cursor: pointer; }
@@ -256,6 +260,9 @@ textarea { padding: 12px; resize: vertical; line-height: 1.55; }
 @media (max-width: 560px) {
   .brand strong { font-size: 0.84rem; }
   .brand-mark { width: 39px; height: 39px; }
+  .header-brand-group { gap: 8px; }
+  .header-app-switch { width: 39px; min-height: 39px; justify-content: center; padding: 0; }
+  .header-app-switch span { display: none; }
   .editor-badge { display: none; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 7px; }
   .archive-section { padding-top: 16px; }
