@@ -26,21 +26,13 @@ export function Home({ openArticle, openEditor }: { openArticle: (date: string) 
 
   return (
     <main>
-      <section className="hero">
-        <p className="eyebrow">Independent daily briefing</p>
-        <h1>The market day,<br />without the noise.</h1>
-        <p>Long-form summaries of the U.S. stock market, major economic developments, company news, and the events that matter next.</p>
-      </section>
-
-      <section className="archive-section" aria-labelledby="archive-title">
-        <div className="section-heading"><div><p className="eyebrow">Daily archive</p><h2 id="archive-title">Latest briefings</h2></div><span>{articles.length} {articles.length === 1 ? 'edition' : 'editions'}</span></div>
+      <section className="archive-section" aria-label="Published daily briefings">
         {loading ? <LoadingState /> : error ? <ErrorState message={error} retry={() => void loadArticles()} /> : articles.length === 0 ? (
           <div className="empty-archive"><Newspaper size={30} /><h2>No published briefings yet</h2><p>Open the editor to publish the first daily market report.</p></div>
         ) : (
           <div className="article-card-list">
             {articles.map((article, index) => (
               <article className={index === 0 ? 'daily-card featured' : 'daily-card'} key={article.id}>
-                <div className="daily-card-index">{String(articles.length - index).padStart(2, '0')}</div>
                 <div className="daily-card-copy">
                   <div className="article-meta"><span><CalendarDays size={16} />{formatLongDate(article.publication_date)}</span><span><Clock3 size={16} />{readingTime(article.content_markdown)} min read</span>{index === 0 && <strong>Latest</strong>}</div>
                   <h2>{article.title}</h2>
@@ -59,7 +51,7 @@ export function Home({ openArticle, openEditor }: { openArticle: (date: string) 
 }
 
 function formatLongDate(value: string) {
-  return new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`))
+  return new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`))
 }
 
 function readingTime(content: string) {
